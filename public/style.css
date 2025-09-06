@@ -1,0 +1,2263 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+:root {
+    --bg: linear-gradient(to bottom, #fff, #f9f9f9);
+    --text-color: #333;
+    --accent-color: #BC2328;
+    --nav-color: #f9f9f9;
+    --link-color: #333;
+}
+
+body.dark {
+    --bg: linear-gradient(to bottom, #111, #222);
+    --text-color: #fff;
+    --accent-color: #fff;
+    --nav-color: #BC2328;
+    --link-color: #BC2328;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+a:hover, button:hover {
+    opacity: 0.6;
+    box-shadow: 0 5px 10px 0 var(--text-color);
+}
+
+.border {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.custom-btn {
+    background-color: #BC2328;
+    border-radius: 40px;
+    color: #fff;
+    padding: 10px 40px;
+}
+
+.custom-modal {
+    width: 40%;
+    border: 2px solid var(--text-color);
+    padding: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    z-index: 3000;
+}
+
+.close-modal {
+    font-size: 40px;
+    color: var(--text-color);
+    padding: 0 15px;
+    border: 1px solid var(--text-color);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.d-none {
+    display: none;
+}
+
+.overlay {
+    background-color: #333;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2999;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+header, footer {
+    background-color: #BC2328;
+    width: 100%;
+    position: absolute;
+}
+
+header {
+    height: 110px;
+}
+
+header .container, .footer .container {
+    height: 80px;
+}
+
+.logo {
+    height: 70px;
+}
+
+.logo:hover {
+    box-shadow: none;
+}
+
+.logo img, .burger-menu img, .pattern img {
+    height: 100%;
+}
+
+#theme-toggle {
+    font-size: 24px;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 40px;
+    box-shadow: 5px 5px rgba(1, 1, 1, 0.2);
+}
+
+#theme-toggle:hover {
+    scale: 1.05;
+    opacity: 0.8;
+}
+
+.privacy-note {
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.privacy-note a {
+    color: var(--accent-color);
+}
+
+.burger-menu {
+    height: 30px;
+    z-index: 2000;
+}
+
+.burger-menu:hover {
+    box-shadow: none;
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-color: #BC2328;
+    transform: translateX(100%);
+    transition: transform 1s ease;
+    border-left: 2px solid #fff;
+    z-index: 1000;
+    text-align: center;
+}
+  
+#menu.active {
+    transform: translateX(0%);
+}
+  
+#menu ul {
+    padding: 1rem;
+    padding-top: 4rem;
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    list-style: none;
+}
+  
+#menu li {
+    margin-bottom: 0.8rem;
+}
+  
+#menu li a {
+    color: #fff;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    box-shadow: none;
+}
+
+.pattern {
+    height: 30px;
+    overflow: hidden;
+}
+
+.footer {
+    height: 80px;  
+}
+
+.social-media-links {
+    gap: 30px;
+}
+
+.footer a:hover {
+    box-shadow: none;
+}
+
+/* Home page */
+
+.main {
+    padding: 140px 0 30px 0;
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--text-color);
+    background: var(--bg);
+    min-height: calc(100vh - 80px);
+}
+
+.main-title {
+    font-size: 48px;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+.main-title, .subtitle {
+    text-align: center;
+}
+
+.main-title mark, .event-location mark {
+    color: #BC2328;
+    background: none;
+}
+
+.main-center {
+    width: 100%;
+    margin: 30px 0;
+}
+
+.main-center-right {
+    width: 50%;
+}
+
+.main-center-right .swiper {
+    width: 100%;
+}
+
+.main-center-right .swiper-slide {
+    text-align: center;
+    width: 90%;
+}
+
+.main-center-right .swiper-slide a {
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+}
+
+.main-center-right .swiper-slide a:hover {
+    box-shadow: none;
+}
+
+.main-center-right .swiper-slide img {
+    width: 100%;          
+    height: 400px;       
+    object-fit: cover;  
+    object-position: center;     
+    border-radius: 40px;
+    position: relative;
+    z-index: 10;
+    border: 2px solid #BC2328;
+}
+
+.main-center-right .swiper-shadow {
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    z-index: 1;
+    background-color: #BC2328;
+    border-radius: 40px;
+    top: 10px;
+    left: 10px;
+}
+
+.main-center-right .swiper-slide p {
+    z-index: 11;
+    margin-top: 10px;
+    text-align: center; 
+    font-size: 36px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 20px 10px;
+    background-color: rgba(188, 35, 40, 0.7);
+}
+
+.main-center-left p {
+    margin-bottom: 5px;
+}
+
+.main p, .main-center-left li {
+    font-size: 24px;
+}
+
+.subtitle {
+    margin-top: 20px;
+}
+
+.main-center-right img {
+    height: 300px;
+}
+
+.pages-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.pages-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 24px;
+    color: var(--accent-color);
+    text-align: center;
+    margin-top: 10px;
+    height: 60px;
+    border: 2px solid var(--accent-color);
+    border-radius: 40px;
+    width: 260px;
+    padding: 10px 20px;
+}
+
+.pages-links a:last-child {
+    background-color: #BC2328;
+    color: #fff;
+    border: none;
+}
+
+/* Events page */
+
+.extra-title {
+    font-size: 40px;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.event-filter {
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.filter-button, .filter-input {
+    width: 160px;
+    border-radius: 40px;
+    padding: 10px;
+    height: 60px;
+    font-size: 24px;
+    text-align: center;
+}
+  
+.filter-input, #choose-date  {
+    border: 2px solid #BC2328;
+    color: #BC2328;
+}
+  
+.filter-button {
+    background-color: #BC2328;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.events-for-everyone, .events-for-guests, .benefits {
+    margin: 20px 0 40px 0;
+}
+
+.event-card-container, .recommendation-tip-container {
+    position: relative;
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.event-card-shadow, .recommendation-tip-shadow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #BC2328;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    z-index: 0;
+}
+
+.event-card, .recommendation-tip {
+    position: relative;
+    z-index: 10; 
+    background: var(--bg);
+    border: 2px solid #BC2328;
+    border-radius: 40px;
+    padding: 10px;
+    font-size: 24px;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+}
+
+.event-title {
+    color: var(--accent-color);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.event-title, .event-description {
+    padding: 0;
+    margin: 0;
+}
+
+.event-description {
+    text-transform: lowercase;
+}
+
+.date-picker {
+    position: relative;
+    max-width: 200px;
+}
+  
+.choose-date {
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.choose-date {
+    border: 1px solid #BC2328;
+    border-radius: 40px;
+    color: #BC2328;
+}
+
+.fixed-date, .event-date {
+    border: 1px solid var(--accent-color);
+    border-radius: 40px;
+    color: var(--accent-color);
+}
+  
+.date-dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #BC2328;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; 
+    z-index: 100;
+}
+  
+.date-option {
+    color: #333;
+    padding: 5px;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    margin: 0;
+}
+  
+.date-option:last-child {
+    border-bottom: none;
+}
+  
+.date-option:hover {
+    background-color: #f9f9f9;
+}
+
+.fixed-date {
+    padding: 10px;
+}
+
+.event-location, .event-price, .event-availability {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    text-transform: lowercase;
+}
+
+.no-events-for-everyone, .no-events-for-guests, .no-access-events, .no-access-benefits {
+    color: #BC2328;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.event-booking-confirmation .event-card {
+    border: none;
+}
+
+.event-date {
+    padding: 10px;
+}
+
+.booking-form {
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.booking-form h3 {
+    width: 70%;
+    text-align: center;
+}
+
+.guest-form {
+    margin-bottom: 30px;
+}
+
+.booking-form input {
+    border: 1px solid #BC2328;
+    border-radius: 40px;
+    margin: 10px 0;
+    color: #BC2328;
+    text-align: center;
+}
+
+.event-booking-success {
+    padding: 70px 10px;
+    text-align: center;
+    color: #BC2328;
+}
+
+.event-booking-success p {
+    text-transform: initial;
+}
+
+/* Tours */ 
+
+.check-tours {
+    text-decoration: none;
+    font-size: 36px;
+    display: inline-block;
+    margin: 30px 0;
+}
+
+.tours-page .extra-title {
+    color: var(--accent-color);
+    margin-bottom: 30px;
+}
+
+.tours-page .subtitle a {
+    color: #BC2328;
+    text-decoration: none;
+}
+
+.carousel {
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 0 !important;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    padding-bottom: 10px;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 1.5s ease;
+    position: relative;
+}
+
+.tour-container, .recommendation-container, .wildlife-container, .trip-container, .article-container {
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+}
+
+.tour-shadow, .recommendation-shadow, .wildlife-item-shadow, .trip-shadow, .article-shadow {
+    position: absolute;
+    background-color: #BC2328;
+    border-radius: 40px;
+    z-index: 1; 
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 10px;
+}
+
+.tour-img, .recommendation-image, .wildlife-img, .trip-img, .article-img {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease, width 0.3 ease, height 0.3 ease;
+    border-radius: 40px;
+    position: relative;
+    z-index: 10; 
+    background-color: #fff;
+    border: 2px solid #BC2328;
+}
+
+.tour-title, .recommendation-title, .wildlife-title, .trip-title {
+    margin: 10px auto;
+    font-size: 36px;
+    text-align: center;
+    max-width: 400px;
+    transition: font-size 0.3s ease;
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--accent-color);
+    display: inline-block;
+}
+
+.swiper-btn-prev, .swiper-btn-next {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    color: var(--accent-color);
+    font-size: 96px;
+}
+
+.swiper-btn-prev {
+    left: 20px;
+}
+
+.swiper-btn-next {
+    right: 20px;
+}
+
+.tour-content, .article-content {
+    color: var(--accent-color);
+    margin: 30px 0 40px 0;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    width: 100%;
+}
+
+.tour-name, .article-name {
+    font-size: 32px;
+}
+
+.tour-price, .tour-container a, .recommendation-link, .article-container a {
+    font-size: 24px;
+}
+
+.tour-price {
+    border: 1px solid var(--accent-color);
+    padding: 5px 10px;
+    border-radius: 40px;
+}
+
+.tour-container a, .recommendation-link, .trip-container button, .article-container a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #BC2328;
+    border: 1px solid #fff;
+    border-radius: 40px;
+    padding: 5px 10px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 200px;
+    text-align: center;
+}
+
+.tour-subtitle {
+    color: #BC2328;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    font-size: 32px;
+}
+
+.tour-text {
+    text-align: center;
+}
+
+.tour-days, .categories {
+    gap: 10px;
+    padding: 10px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.tour-days::-webkit-scrollbar, .categories::-webkit-scrollbar {
+    height: 8px;
+}
+  
+.tour-days::-webkit-scrollbar-thumb, .categories::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
+  
+.day-tab, .category-tab {
+    padding: 10px 20px;
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.day-tab {
+    font-size: 32px;
+}
+  
+.day-tab.active, .category-tab.active {
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.day-tab:hover {
+    box-shadow: none;
+}
+  
+.day-content {
+    gap: 10px;
+}
+  
+.day-img {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #BC2328;
+    margin-bottom: 40px;
+}
+  
+.day-title {
+    font-size: 40px;
+    color: var(--accent-color);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.included-list {
+    font-size: 24px;
+    max-width: 800px;
+    margin: 20px auto 40px auto;
+}
+
+.back-to-tours, .back-to-blog {
+    text-decoration: none;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 40px;
+    padding: 10px 0;
+}
+
+.request-tour, .back-to-tours, .back-to-blog {
+    font-size: 36px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    display: block;
+    width: 390px;
+}
+
+.request-tour-success p, sent-rate-success, .request-trip-success {
+    padding: 70px 40px;
+    text-align: center;
+}
+
+/* Recommendations */
+
+.categories-nav {
+    background-color: var(--nav-color);
+    width: 100%;
+}
+
+.category-tab {
+    font-size: 24px;
+    width: 200px;
+}
+
+.category-tab img {
+    width: 60px;
+    height: 60px;
+}
+
+.recommendation-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recommendation-description {
+    margin: 20px;
+}
+
+.recommendation-tip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    color: var(--accent-color);
+}
+
+.recommendation-rating {
+    border-left: 1px solid #BC2328;
+    padding-left: 20px;
+    width: 80%;
+    margin: 20px 0 30px 0;
+}
+
+.recommendation-rating-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.recommendation-rating-top h2 {
+    font-size: 36px;
+    color: var(--accent-color);
+}
+
+.rate-btn {
+    background-color: #BC2328;
+    color: #fff;
+}
+
+.rate-btn, .show-all-reviews, .hide-reviews {
+    padding: 10px 20px;
+    border-radius: 40px;
+}
+
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.review {
+    margin: 0;
+}
+
+.review mark {
+    color: #BC2328;
+    background: none;
+    padding: 0;
+}
+
+.show-all-reviews, .hide-reviews {
+    border: 1px solid var(--accent-color);
+    align-self: center;
+    margin-top: 10px;
+    color: var(--accent-color);
+}
+
+.no-recommendations {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.rate-modal {
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    text-align: center;
+    padding: 60px 0 10px 0;
+}
+
+.rate-modal label {
+    font-size: 24px;
+}
+
+.rate-modal select, .rate-modal textarea, .rate-modal input {
+    border-radius: 40px;
+    padding: 10px 30px;
+    border: 1px solid #BC2328;
+}
+
+.rate-modal select {
+    color: #BC2328;
+}
+
+.rate-modal .custom-btn {
+    margin-top: 20px;
+}
+
+.sent-rate-success {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.advice {
+    width: 80%;
+    margin: 20px auto;
+    gap: 30px;
+}
+
+.advice h3 {
+    color: #BC2328;
+}
+
+.advice-container, .advice-item {
+    gap: 10px;
+}
+
+.advice-item div {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    aspect-ratio: 1 / 1;
+    border: 2px solid #BC2328;
+}
+
+.words table {
+    border: 2px solid #BC2328;
+    width: 100%;
+}
+
+.words td {
+    border: 1px solid rgba(188,35,40, 0.2);
+    padding: 10px;
+    font-size: 24px;
+    width: calc(100% / 3);
+}
+
+/* Wildlife */
+
+.wildlife-carousel .swiper {
+    margin-top: 40px;
+}
+
+.wildlife-carousel .swiper-btn-prev, .wildlife-carousel .swiper-btn-next {
+    top: 30%;
+}
+
+.wildlife-title {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.facts {
+    height: 350px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.facts p {
+    border-left: 1px solid #BC2328;
+    padding-left: 20px;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.facts mark {
+    background: none;
+    color: #BC2328;
+    padding: 0;
+}
+
+/* Day Trips */
+
+.trips .subtitle mark {
+    background: none;
+    color: #BC2328;
+    padding: 0;
+}
+
+.trips .subtitle a {
+    text-decoration: none;
+    color: #BC2328;
+}
+
+.trip {
+    margin: 20px 0 40px 0;
+    text-align: center;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trip-title {
+    margin: 0 auto;
+}
+
+.trip-info .trip-title {
+    padding: 10px 60px;
+    min-width: 100%;
+}
+
+.trip-container {
+    margin-bottom: 20px;
+}
+
+.trip-price, .trip-availability {
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.trip-date {
+    color: var(--accent-color);
+    font-size: 24px;
+}
+
+.book-trip, .request-trip {
+    margin-top: 10px;
+}
+
+.book-trip-success p {
+    padding: 70px 10px;
+}
+
+/* Blog */ 
+
+.article-content .container:first-child .article-container {
+    margin-top: 0;
+}
+
+.article-container {
+    margin: 30px 0 40px 0;
+}
+
+.article-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(188, 35, 40, 0.7);
+    padding: 20px 10px;
+    text-transform: uppercase;
+}
+
+/* Article */ 
+
+#article-title {
+    text-transform: uppercase;
+}
+
+#article-image {
+    width: 100%;
+    max-width: 800px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #BC2328;
+    margin-bottom: 40px;
+}
+
+#article-content {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+#article-content h3, #article-content h4 {
+    font-size: 32px;
+    text-transform: uppercase;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+}
+
+#article-content img {
+    width: 100%;
+}
+
+/* FAQ */
+
+.faq {
+    max-width: 800px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.faq-question {
+    color: var(--text-color);
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question::after {
+    content: "+";
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question::after {
+    content: "-";
+    transform: rotate(180deg);
+    }
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+    padding: 1rem;
+}
+
+.faq a {
+    color: var(--link-color);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Privacy Policy */ 
+
+.last-updated {
+    color: #BC2328;
+}
+
+.privacy-policy-container h2 {
+    color: var(--accent-color);
+}
+
+.privacy-policy-container a {
+    color: #BC2328;
+}
+
+/* Contacts */
+
+.contacts-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+
+.contacts-links mark {
+    color: #BC2328;
+    background: none;
+    padding: 0;
+}
+
+.location {
+    margin: 0;
+    color: #BC2328;
+    font-size: 1.4rem !important;
+}
+
+iframe {
+    width: 100%;
+}
+
+/* Profile */ 
+
+.authorisation-form {
+    font-size: 24px;
+    gap: 10px;
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+}
+
+.authorisation-form input {
+    border: 1px solid #BC2328;
+    border-radius: 40px;
+}
+
+.authorisation-form button {
+    margin-top: 20px;
+}
+
+.guest-profile-page {
+    padding-top: 110px;
+}
+
+.guest-profile-page .main-title {
+    text-transform: uppercase;
+}
+
+.profile-top {
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.profile-info {
+    text-transform: lowercase;
+    line-height: 1;
+}
+
+.profile-info label, .profile-info input, .profile-info button {
+    font-size: 24px;
+}
+
+.profile-info input {
+    border: 1px solid #BC2328;
+}
+
+.profile-info button {
+    margin-top: 10px;
+}
+
+.profile-top p {
+    margin: 0;
+}
+
+.edit-name-btn, #save-guest-name {
+    border: 1px solid #BC2328;
+}
+
+.edit-name-btn {
+    color: #BC2328;
+    background-color: #f9f9f9;
+}
+
+.profile-top-side {
+    gap: 10px;
+}
+
+.notifications-btn {
+    position: relative;
+}
+
+.notifications-btn img {
+    width: 50px;
+    height: 50px;
+}
+
+.notifications-btn span, .profile-menu-item span {
+    font-family: "Cormorant SC", serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 55%;
+    left: 60%;
+    background: var(--bg);
+    line-height: 1;
+}
+
+.guest-profile-page .profile-container:last-child {
+    padding-bottom: 100px;
+}
+
+.profile-container .main-title {
+    margin-top: 20px;
+}
+
+.profile-info-list a {
+    text-decoration: none;
+    color: #BC2328;
+    font-weight: 700;
+}
+
+.profile-info-list li {
+    font-size: 20px;
+}
+
+.profile-footer {
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    background-color: var(--nav-color);
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #BC2328;
+}
+
+.profile-footer .container {
+    position: relative;
+    overflow: hidden;
+}
+  
+.profile-menu {
+    width: 100%;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    height: 80px;
+}
+  
+.profile-menu::-webkit-scrollbar {
+    display: none; 
+}
+  
+.profile-menu-item {
+    flex: 0 0 auto;
+    text-align: center;
+    width: 105px;
+    position: relative;
+}
+
+.profile-menu-item a:first-child {
+    padding-top: 5px;
+}
+
+.profile-menu-item a.active:first-child {
+    border-top: 3px solid var(--accent-color);
+}
+
+.profile-menu-item a.active:last-child {
+    color: var(--accent-color);
+}
+
+.profile-menu-item a:hover {
+    box-shadow: none;
+}
+
+.profile-menu-item img {
+    width: 40px;
+    height: 40px;
+}
+  
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
+}
+  
+.prev-btn {
+    left: 10px;
+}
+  
+.next-btn {
+    right: 10px;
+}
+
+.profile-menu-item a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.profile-menu-item span {
+    display: none;
+}
+
+/* General chat */
+
+.general-chat, .admin-chat, .orders, .blog {
+    padding-bottom: 140px; 
+}
+
+.general-chat .extra-title, .admin-chat .extra-title, .orders .extra-title, .blog .extra-title {
+    margin: 0;
+}
+
+.members-number {
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.chat-container {
+    position: fixed;
+    top: calc(220px);
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    margin: 10px auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.chat-box {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+    flex-direction: column;
+    padding: 5px 10px;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+.message {
+    width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    position: relative;
+    border: 1px solid #BC2328;
+}
+
+.message.left {
+    align-self: flex-start;
+}
+
+.message.right {
+    align-self: flex-end;
+}
+
+.message.admin, .unread {
+    background: rgba(188,35,40, 0.2);
+}
+
+.message.manager {
+    background-color: #ddffdd; /* Зеленый фон для менеджеров */
+}
+
+.message .time, .message .role {
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    opacity: 0.7;
+}
+
+.message .time {
+    right: 10px;
+}
+
+.message .role {
+    left: 10px;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #BC2328;
+    border-radius: 40px;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    background: #BC2328;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+/* Admin chat */
+
+.admin-chat .extra-title, .orders .extra-title, .blog .extra-title {
+    margin-bottom: 30px;
+}
+
+.admin-chat .container {
+    overflow: hidden;
+}
+
+.chat-list {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: thin; 
+    scrollbar-color: #888 #f1f1f1; 
+}
+  
+.chat-list::-webkit-scrollbar {
+    height: 8px; 
+}
+  
+.chat-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+  
+.chat-list::-webkit-scrollbar-track {
+    background: #333;
+}
+  
+.chat-list-item {
+    padding: 10px 15px;
+    border: 1px solid #BC2328;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    white-space: nowrap; /* Чтобы текст не переносился */
+    flex: 0 0 auto; /* Фиксированная ширина */
+}
+  
+.chat-list-item.active {
+    background-color: #BC2328;
+    color: white;
+    font-weight: bold;
+} 
+
+#search-input {
+    margin-bottom: 5px;
+    border: 1px solid #333;
+}
+
+.admin-chat-admin {
+    padding-top: 125px;
+}
+
+/* My orders */
+
+.orders-container {
+    font-family: "Cormorant SC", serif;
+    font-weight: 500;
+}
+
+.orders-filter {
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.restaurant-menu-link p {
+    margin: 0;
+}
+
+.restaurant-menu-link a {
+    color: var(--accent-color);
+}
+
+.filter-btn {
+    font-size: 20px;
+    color: var(--accent-color);
+    width: 200px;
+    height: 80px;
+    padding: 10px;
+    border: 2px solid var(--accent-color);
+    border-radius: 40px;
+    text-align: center;
+}
+
+.filter-btn.active {
+    background: rgba(188,35,40, 0.2);
+}
+
+.order-item, .orders-total {
+    display: flex;
+    padding: 10px;
+    padding-bottom: 0;
+}
+
+.order-item {
+    border-bottom: 1px solid var(--text-color);
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.order-item button {
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0 10px;
+    border-radius: 20px;
+}
+
+.order-title, .total-title {
+    flex: 3;
+    font-size: 18px;
+}
+
+.order-price, .total-price {
+    flex: 1;
+    font-size: 18px;
+    text-align: end;
+}
+
+.orders-total {
+    color: var(--accent-color);
+}
+
+/* Available Orders */ 
+
+.category-section {
+    margin-top: 30px;
+    border: 1px solid var(--text-color);
+    border-radius: 10px;
+}
+
+.category-section h2 {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+.category-section .order-item:last-child {
+    border-bottom: none;
+}
+
+/* Admin */
+
+.admin-section {
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+    padding-top: 110px;
+    padding-bottom: 140px;
+}
+
+.admin-name, .manager-name {
+    color: var(--text-color);
+    font-style: italic;
+    padding-left: 5px;
+}
+
+.admin-section .main-title {
+    margin-top: 20px;
+}
+
+.admin-section .profile-top {
+    padding: 20px 10px;
+}
+
+#logout-btn {
+    color: var(--accent-color);
+    font-size: 32px;
+    text-decoration: underline;
+    margin: 0;
+    padding: 0 5px;
+}
+
+#deleteGuestsBtn {
+    margin-bottom: 10px;
+}
+
+.admin-form {
+    font-size: 20px;
+    width: 70%;
+    margin-bottom: 30px;
+}
+
+.admin-form h2 {
+    color: var(--accent-color);
+}
+
+.admin-form input, .admin-form textarea, .admin-form select {
+    border: 1px solid #BC2328;
+    border-radius: 40px;
+    padding: 0 10px;
+    height: 40px;
+}
+
+.admin-form button {
+    margin-top: 20px;
+}
+
+#is-free {
+    border: 1px solid #BC2328;
+    height: 40px;
+}
+
+.events-for-all-admin, .events-for-guests-admin {
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+.events-for-all-admin p, .events-for-guests-admin p {
+    border-bottom: 1px solid #333;
+}
+
+.admin-section ul {
+    padding: 20px;
+}
+
+.admin-section ul li, .admin-section ul a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 24px;
+}
+
+#benefits-list {
+    gap: 20px;
+}
+
+.benefit, .event {
+    border: 2px solid #BC2328;
+    padding: 10px;
+}
+
+.notifications-list {
+    padding: 10px;
+    gap: 10px;
+    border: 1px solid #BC2328;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.notifications-list .custom-btn {
+    margin-bottom: 10px;
+}
+
+.notifications-list .notification-item {
+    border-bottom: 1px solid #333;
+    width: 100%;
+}
+
+.trips-list {
+    gap: 10px;
+}
+
+.trip-item {
+    border-bottom: 1px solid var(--text-color);
+    padding-bottom: 10px;
+}
+
+.trip-item p {
+    margin: 0;
+}
+
+.trip-item ul {
+    padding: 10px 0 0 0;
+    list-style: none;
+    margin: 0 10px;
+}
+
+.trip-item .custom-btn {
+    font-size: 14px;
+    margin: 5px;
+}
+
+.trip-bookers li {
+    font-size: 18px !important;
+    text-align: left;
+    color: var(--text-color) !important;
+}
+
+
+.trip-date-info {
+    padding: 10px;
+    border-radius: 40px;
+    border: 1px solid #BC2328;
+    margin-bottom: 10px;
+}
+
+.recommendations-info {
+    padding: 20px 0;
+}
+
+.recommendations-info #category-filter {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #BC2328;
+    border-radius: 40px;
+    margin-bottom: 10px;
+}
+
+.recommendations-info .recommendation-item button {
+    margin-top: 10px;
+}
+
+.recommendations-info .recommendation-item p {
+    margin: 0;
+}
+
+.recommendations-info .recommendation-item {
+    border: 1px solid #BC2328;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.recommendations-info a {
+    color: #BC2328;
+    text-decoration: none;
+}
+
+#reviews-container {
+    padding: 20px 0;
+    gap: 10px;
+}
+
+#reviews-container .review-item {
+    border: 1px solid #BC2328;
+    background: rgba(188,35,40, 0.2);
+    padding: 20px 10px;
+    border-radius: 40px;
+}
+
+.approve-btn {
+    margin-right: 10px;
+}
+
+#orders-list {
+    margin-top: 10px;
+}
+
+#orders-list input, #orders-list select {
+    border: 1px solid #BC2328;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.order-item-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-bottom: 1px solid #333;
+}
+
+.order-item-admin:last-child {
+    border-bottom: none;
+}
+
+.order-item-admin {
+    padding: 10px;
+}
+
+.order-item-admin button {
+    max-width: 200px;
+}
+
+#orders-modal {
+    z-index: 3000;
+}
+
+.modal-content {
+    background: var(--bg) !important;
+}
+
+.group-booking {
+    background: rgba(51,51,51, 0.1);
+}
+
+#guest-list {
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+#guest-list h2 {
+    margin-top: 20px;
+    color: #BC2328;
+}
+
+.guest-item {
+    border-bottom: 1px solid #333;
+    padding: 5px;
+}
+
+.guest-item input {
+    border: 1px solid #333;
+    padding: 0 5px;
+}
+
+.guest-item:last-child {
+    border-bottom: none;
+}
+
+.group-label {
+    color: green;
+}
+
+#add-guest-form {
+    margin-top: 20px;
+}
+
+.modal { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+}
+
+.modal-content { 
+    background: #fff; 
+    padding: 20px; 
+    width: 50%; 
+    margin: 5% auto; 
+}
+
+.modal-content input, .modal-content select {
+    padding: 5px 10px;
+    min-height: 40px;
+    border: 1px solid #333;
+}
+
+.modal-content .custom-btn {
+    max-width: 200px;
+    margin-top: 10px;
+}
+
+.emails-form {
+    width: 50%;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#order-search, #group-order-search {
+    width: 300px;
+}
+
+.invoice-btn, .mark-as-paid-btn {
+    margin-bottom: 10px;
+    border-radius: 40px;
+    padding: 10px;
+    width: 200px;
+    color: #fff;
+}
+
+.invoice-btn {
+    background-color: #BC2328;
+}
+
+.mark-as-paid-btn {
+    background-color: green;
+}
+
+.filter-btns {
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-btns button {
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 20px;
+    width: 200px;
+}
+
+.close { 
+    cursor: pointer; 
+    right: 20px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* Reports */
+
+th, td {
+    font-size: 24px;
+}
+
+.report-filters button {
+    margin: 5px;
+}
+
+.chart-container {
+    position: relative; 
+    width: 100%; 
+    max-width: 800px; 
+    height: 300px;
+    margin: 20px auto;
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+    #menu {
+        width: 50%;
+    }
+
+    .main-center {
+        flex-direction: column;
+    }
+
+    .main-center-right, .main-center-left {
+        width: 100%;
+    }
+
+    .main-center-right p {
+        font-size: 24px;
+    }
+
+    .main-center-right .swiper {
+        overflow: visible;
+    }
+}
+
+@media (max-width: 800px) {
+    .custom-modal {
+        width: 90%;
+    }
+
+    .close-modal {
+        font-size: 32px;
+        padding: 0 10px;
+    }
+
+    #theme-toggle {
+        font-size: 18px;
+    }
+
+    #menu {
+        width: 100%;
+    }
+
+    .main-title {
+        font-size: 36px;
+    }
+
+    .extra-title {
+        font-size: 32px;
+    }
+
+    .main p, .main-center-left li, .words td {
+        font-size: 18px;
+    }
+
+    .main-center-right .swiper-slide img, .main-center-right .swiper-shadow {
+        height: 300px;
+    }
+
+    .filter-button, .filter-input {
+        width: 110px;
+        border-radius: 40px;
+        padding: 10px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .event-card, .recommendation-tip, .recommendation-rating {
+        width: 100%;
+    }
+
+    .event-card, .event-booking-form, .recommendation-tip {
+        font-size: 18px;
+    }
+
+    .check-tours {
+        font-size: 24px;
+    }
+
+    .tours-page .tour-container, .recommendation-container, .wildlife-container, .trip-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .tour-title, .recommendation-title, .wildlife-title, .trip-title {
+        font-size: 24px;
+        max-width: 300px;
+    }
+
+    .swiper-btn-prev, .swiper-btn-next {
+        font-size: 64px;
+    }
+
+    .swiper-btn-prev {
+        left: 10px;
+    }
+    
+    .swiper-btn-next {
+        right: 10px;
+    }
+
+    .tour-shadow, .recommendation-shadow, .recommendation-tip-shadow, .wildlife-item-shadow, .trip-shadow, .article-shadow, .main-center-right .swiper-shadow {
+        top: 5px;
+        left: 5px;
+    }
+
+    .all-tours-page .tour-container, .article-container {
+        width: 100%;
+        height: 300px;
+    }
+
+    .tour-name, .tour-container a, .recommendation-link, .article-name {
+        font-size: 20px;
+    }
+    
+    .tour-price {
+        font-size: 18px;
+    }
+
+    .tour-container a, .recommendation-link, .trip-container button, .article-container a {
+        width: 170px;
+    }
+
+    .tour-subtitle {
+        font-size: 20px;
+    }
+    
+    .day-tab {
+        font-size: 20px;
+    }
+
+    .day-title {
+        font-size: 32px;
+    }
+
+    .day-img {
+        height: 300px;
+    }
+
+    .included-list {
+        font-size: 18px;
+    }
+
+    .request-tour, .back-to-tours, .back-to-blog {
+        font-size: 24px;
+        width: 290px;
+    }
+
+    .category-tab {
+        font-size: 16px;
+        width: 125px;
+    }
+
+    .recommendation-rating-top h2 {
+        font-size: 24px;
+    }   
+    
+    .rate-btn, .show-all-reviews, .hide-reviews {
+        padding: 5px 10px;
+    }
+
+    .advice {
+        width: 100%;
+        text-align: center;
+    }
+
+    .advice-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wildlife-title {
+        height: 80px;
+    }
+
+    .facts {
+        height: 300px;
+    }
+
+    .wildlife-carousel .swiper-btn-prev, .wildlife-carousel .swiper-btn-next {
+        top: 20%;
+    }
+
+    .trip-date {
+        font-size: 18px;
+    }
+
+    .authorisation-form {
+        font-size: 18px;
+    }
+
+    .profile-info label, .profile-info input, .profile-info button {
+        font-size: 18px;
+    }
+
+    .filter-btn {
+        font-size: 16px;
+        height: 70px;
+    }
+
+    .admin-form {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    th, td {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    #theme-toggle {
+        font-size: 16px;
+    }
+
+    .main-title {
+        font-size: 32px;
+    }
+
+    .wildlife-carousel .swiper {
+        margin-top: 0px;
+    }
+
+    .facts {
+        height: 450px;
+    }
+
+    #article-content h3, #article-content h4 {
+        font-size: 24px;
+    }
+
+    th, td {
+        font-size: 15px;
+        padding: .2rem !important;
+    }
+}
+
+@media (max-width: 450px) {
+    #theme-toggle {
+        font-size: 14px;
+    }
+
+    .tours-page .tour-container, .wildlife-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .tour-title, .recommendation-title, .wildlife-title, .trip-title {
+        max-width: 200px;
+    }
+
+    th, td {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Habibi Experience",
+  "short_name": "Habibi",
+  "description": "Tours, events, day trips, recommendations, Habibi guest profiles and more around Unawatuna, Galle and beyond.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#BC2328",
+  "background_color": "#f9f9f9",
+  "icons": [
+    { "src": "/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/img/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/img/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Guests in Habibi Hostel Admin Dashboard – add or edit guest's information and orders.">
+    <title>Admin Dashboard | Guests Information | Habibi Hostel</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Cormorant+SC:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="logo" href="index.html"><img src="img/logo.png" alt="logo"></a>
+            <button id="theme-toggle">SWITCH THEME</button>
+            <button class="burger-menu" aria-label="Open menu"><img src="img/burger.png" alt="menu"></button>
+        </div>
+        <div class="pattern d-flex">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+        </div>
+        <nav id="menu" class="menu">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="events.html">EVENTS</a></li>
+                <li><a href="tours.html">TOURS</a></li>
+                <li><a href="trips.html">DAY TRIPS</a></li>
+                <li><a href="recommendations.html">RECOMMENDATIONS</a></li>
+                <li><a href="wildlife.html">WILDLIFE AROUND</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contacts.html">CONTACTS</a></li>
+                <li><a href="profile.html">LOGIN / PROFILE</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="main admin-section">
+        <div class="container">
+            <h1 class="main-title">GUESTS</h1>
+            <input type="date" id="date-filter">
+            <label for="room-filter">ROOM:</label>
+            <select id="room-filter">
+                <option value="">All</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <div id="guest-list" class="d-flex flex-column"></div>
+            <div id="orders-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close close-modal" onclick="closeOrdersModal()">X</span>
+                    <h2>Guest Orders</h2>
+                    <div class="emails-form d-flex flex-column">
+                        <label for="guest-email">Email for Guest Invoice:</label>
+                        <input type="text" id="guest-email" />
+                    </div>
+                    <div class="guest-orders-btns">
+                        <button class="invoice-btn" onclick="generateInvoice(false)">GENERATE INVOICE</button>
+                        <button class="mark-as-paid-btn" onclick="markAsPaid(false)">MARK AS PAID</button>
+                    </div>
+                    <div class="filter-btns d-flex">
+                        <button onclick="filterOrders('all', false)">All</button>
+                        <button onclick="filterOrders('food-drinks', false)">Food & Drinks</button>
+                        <button onclick="filterOrders('services', false)">Services</button>
+                    </div>
+                    <input type="text" id="order-search" placeholder="Search..." oninput="searchOrders(this.value, false)">
+                    <ul id="order-list"></ul>
+                    <p id="total-price"></p>
+            
+                    <div id="group-orders-container" style="display: none;">
+                        <hr>
+                        <h2>Group Orders</h2>
+                        <div class="emails-form d-flex flex-column">
+                            <label for="group-email">Emails for Group Invoice:</label>
+                            <textarea id="group-email" rows="2"></textarea>
+                        </div>
+                        <div class="group-orders-btns">
+                            <button class="invoice-btn" onclick="generateInvoice(true)">GENERATE INVOICE</button>
+                            <button class="mark-as-paid-btn" id="mark-group-paid-btn" onclick="markAsPaid(true)">MARK AS PAID</button>
+                        </div>
+                        <div class="filter-btns d-flex">
+                            <button onclick="filterOrders('all', true)">All</button>
+                            <button onclick="filterOrders('food-drinks', true)">Food & Drinks</button>
+                            <button onclick="filterOrders('services', true)">Services</button>
+                        </div>
+                        <input type="text" id="group-order-search" placeholder="Search..." oninput="searchOrders(this.value, true)">
+                        <ul id="group-order-list"></ul>
+                        <p id="group-total-price"></p>
+                    </div>
+            
+                    <hr>
+                    <h3>Add Order</h3>
+                    <input type="text" id="search-item" placeholder="Search item..." oninput="filterItems(this.value)">
+                    <select id="order-item"></select>
+                    <input type="number" min="1" max="100" id="order-quantity" name="order-quantity" value="1" required>
+                    <button class="custom-btn" onclick="addOrder(false)">Add to Guest</button>
+                    <button class="custom-btn" id="add-to-group-btn" onclick="addOrder(true)" style="display: none;">Add to Group</button>
+                
+                    <hr>
+                    <h3>Custom Order</h3>
+                    <input type="text" id="custom-order-name" placeholder="Item name..." />
+                    <select id="custom-order-category">
+                        <option value="food-drinks">Food & Drinks</option>
+                        <option value="services">Services</option>
+                    </select>
+                    <input type="number" id="custom-order-price" placeholder="Price" min="0" step="0.01" />
+                    <button id="add-custom-guest-btn" class="custom-btn" onclick="addCustomOrder(false)">Add to Guest</button>
+                    <button id="add-custom-group-btn" class="custom-btn d-none" onclick="addCustomOrder(true)">Add to Group</button>
+                </div>
+            </div>
+        </div>
+        <div class="border"></div>
+        <div class="container">
+            <form id="add-guest-form" class="admin-form d-flex flex-column">
+                <h2>ADD GUEST FORM</h2>
+            
+                <label for="reservation-name">RESERVATION NAME:</label>
+                <input type="text" id="reservation-name" name="reservationName" placeholder="reservation name" required>
+            
+                <label for="room-number">ROOM NUMBER:</label>
+                <input type="number" min="1" max="7" id="room-number" name="roomNumber" required>
+            
+                <label for="guest-email">EMAIL:</label>
+                <input type="email" id="add-guest-email" name="guestEmail" required>
+
+                <label for="check-in-date">CHECK-IN DATE:</label>
+                <input type="date" id="check-in-date" name="checkInDate" required>
+            
+                <label for="check-out-date">CHECK-OUT DATE:</label>
+                <input type="date" id="check-out-date" name="checkOutDate" required>
+            
+                <label for="booking-code">BOOKING CODE:</label>
+                <input type="text" id="booking-code" name="bookingCode" required>
+            
+                <label>
+                    <input type="checkbox" id="is-group-booking"> GROUP BOOKING
+                </label>
+            
+                <button class="custom-btn" type="submit">ADD GUEST</button>
+            </form>
+        </div>
+    </section>
+    <footer class="profile-footer">
+        <div class="container d-flex align-items-center">
+            <div class="prev-btn"><</div>
+            <div class="profile-menu d-flex justify-content-between align-items-center">
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin.html"><img src="img/profile.png" alt="profile"></a>
+                    <a href="admin.html">Profile</a>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="general-chat-admin.html"><img src="img/general-chat.png" alt="general chat"></a>
+                    <a href="general-chat-admin.html">General chat</a>
+                    <span class="chat-icon-badge"></span>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-chat-admin.html"><img src="img/admin-chat.png" alt="admin-chat"></a>
+                    <a href="admin-chat-admin.html">Admin chat</a>
+                    <span class="admin-unread-badge"></span>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-orders.html"><img src="img/orders-list.png" alt="orders"></a>
+                    <a href="admin-orders.html">Orders</a>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-guests.html"><img src="img/guests.png" alt="guests info"></a>
+                    <a href="admin-guests.html">Guests</a>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-reports.html"><img src="img/orders.png" alt="recommendations"></a>
+                    <a href="admin-reports.html">Reports</a>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-events.html"><img src="img/events.png" alt="events"></a>
+                    <a href="admin-events.html">Events</a>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-day-trips.html"><img src="img/day-trips.png" alt="habibi day trips"></a>
+                    <a href="admin-day-trips.html">Day Trips</a>
+                </div>
+                <div class="profile-menu-item d-flex flex-column align-items-center">
+                    <a href="admin-recommendations.html"><img src="img/recommendations.png" alt="recommendations"></a>
+                    <a href="admin-recommendations.html">Recommendations</a>
+                </div>
+            </div>
+            <div class="next-btn">></div>
+        </div>
+    </footer>
+    <script src="check-auth-code-admin.js" type="module"></script>
+    <script src="main.js"></script>
+    <script src="firebase.js" type="module"></script>
+    <script src="add-guest.js" type="module"></script>
+    <script src="admin-guests.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="profile.js" type="module"></script>
+    <script src="guests-orders.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script src="generate-invoice.js" type="module"></script>
+    <script>
+        flatpickr("#event-date", {
+            mode: "multiple",
+            dateFormat: "Y-m-d", // Формат даты
+        });
+    </script>
+</body>
+</html>

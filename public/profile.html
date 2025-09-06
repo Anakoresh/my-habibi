@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Login to Habibi Guest Profile – access your reservation, manage your profile, and unlock guest-only benefits at Habibi Hostel, Unawatuna, Sri Lanka.">
+    <meta name="keywords" content="Habibi Hostel login, Habibi guest profile, Sri Lanka hostel account, Unawatuna hostel booking, guest access Habibi Hostel">
+    <title>Login | Habibi Guest Profile | Habibi Hostel Unawatuna Sri Lanka</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Cormorant+SC:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="logo" href="index.html"><img src="img/logo.png" alt="logo"></a>
+            <button id="theme-toggle">SWITCH THEME</button>
+            <button class="burger-menu" aria-label="Open menu"><img src="img/burger.png" alt="menu"></button>
+        </div>
+        <div class="pattern d-flex">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+            <img src="img/pattern.jpg" alt="pattern">
+        </div>
+        <nav id="menu" class="menu">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="events.html">EVENTS</a></li>
+                <li><a href="tours.html">TOURS</a></li>
+                <li><a href="trips.html">DAY TRIPS</a></li>
+                <li><a href="recommendations.html">RECOMMENDATIONS</a></li>
+                <li><a href="wildlife.html">WILDLIFE AROUND</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contacts.html">CONTACTS</a></li>
+                <li><a href="profile.html">LOGIN / PROFILE</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="main profile-page">
+        <div class="container authorisation-container hidden">
+            <h1 class="main-title">LOGIN</h1>
+            <form class="authorisation-form d-flex flex-column align-items-center">
+                <label for="reservation-code">enter your reservation code to login</label>
+                <input type="text">
+                <button class="custom-btn" id="reservation-code">ENTER</button>
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="social-media-links d-flex">
+                <a href="https://www.instagram.com/habibihostellanka?igsh=bG9mbnp6Z3FyYWdi" target="_blank"><img src="img/instagram.svg" alt="instagram"></a>
+                <a href="https://www.facebook.com/share/9ZQujrAn1byjXo8f/?mibextid=kFxxJD" target="_blank"><img src="img/fb.svg" alt="facebook"></a>
+                <a href="https://www.tiktok.com/@habibihostel?_t=8qtTYFS86cc&_r=1" target="_blank"><img src="img/tiktok.svg" alt="tiktok"></a>
+                <a href="https://youtube.com/@habibihostel?si=cECmIZ6kzfZex7TD" target="_blank"><img src="img/youtube.svg" alt="youtube"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+    <script src="firebase.js" type="module"></script>
+    <script src="profile-login.js" type="module"></script>
+</body>
+</html>
