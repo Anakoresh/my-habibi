@@ -4,7 +4,6 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import cors from "cors";
 import admin from "firebase-admin";
-import { readFileSync } from "fs";
 
 // ---------------------- Init ----------------------
 dotenv.config();
@@ -51,14 +50,34 @@ app.post("/send-email", async (req, res) => {
 });
 
 // ---------------------- Firebase Admin ----------------------
-const serviceAccount = JSON.parse(
-  readFileSync("./my-habibi-firebase-adminsdk-fbsvc-805b43ea66.json")
-);
+// const serviceAccount = JSON.parse(
+//   readFileSync("./my-habibi-firebase-adminsdk-fbsvc-805b43ea66.json")
+// );
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL:
+//     "https://my-habibi-default-rtdb.asia-southeast1.firebasedatabase.app",
+// });
+
+// const db = admin.database();
+// const firestore = admin.firestore();
+// ---------------------- Firebase Admin ----------------------
+const serviceAccount = {
+  type: process.env.FIREBASE_TYPE,
+  project_id: process.env.FIREBASE_PROJECT_ID,
+  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+  private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  client_id: process.env.FIREBASE_CLIENT_ID,
+  auth_uri: process.env.FIREBASE_AUTH_URI,
+  token_uri: process.env.FIREBASE_TOKEN_URI,
+  client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
+};
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL:
-    "https://my-habibi-default-rtdb.asia-southeast1.firebasedatabase.app",
+  databaseURL: "https://my-habibi-default-rtdb.asia-southeast1.firebasedatabase.app",
 });
 
 const db = admin.database();
