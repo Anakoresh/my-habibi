@@ -101,10 +101,25 @@ generalChatRef
       const tokensSnapshot = await db.ref("tokens").once("value");
       if (!tokensSnapshot.exists()) return;
 
-      const tokensArray = Object.entries(tokensSnapshot.val())
+      // const tokensArray = Object.entries(tokensSnapshot.val())
+      //   .filter(([authCode]) => authCode !== newMessage.userCode)
+      //   .map(([_, obj]) => obj.fcmToken)
+      //   .filter((token) => typeof token === "string");
+
+      const tokensArray = [];
+      Object.entries(tokensSnapshot.val())
         .filter(([authCode]) => authCode !== newMessage.userCode)
-        .map(([_, obj]) => obj.fcmToken)
-        .filter((token) => typeof token === "string");
+        .forEach(([_, obj]) => {
+        if (Array.isArray(obj.fcmTokens)) {
+          obj.fcmTokens.forEach((t) => {
+            if (t.trim()) tokensArray.push(t.trim());
+          });
+        } else if (typeof obj.fcmToken === "string") {
+          obj.fcmToken.split(",").forEach((t) => {
+            if (t.trim()) tokensArray.push(t.trim());
+          });
+        }
+      });
 
       if (tokensArray.length === 0) return;
 
@@ -158,13 +173,43 @@ adminChatsRef.on("child_added", (guestSnapshot) => {
 
       if (msg.role === "guest") {
         if (msg.read_by) {
-          tokensArray = Object.keys(msg.read_by)
-            .map((adminCode) => allTokens[adminCode]?.fcmToken)
-            .filter((token) => typeof token === "string");
+          // tokensArray = Object.keys(msg.read_by)
+          //   .map((adminCode) => allTokens[adminCode]?.fcmToken)
+          //   .filter((token) => typeof token === "string");
+          
+          tokensArray = [];
+          Object.keys(msg.read_by).forEach((adminCode) => {
+            const adminTokenObj = allTokens[adminCode];
+            if (!adminTokenObj) return;
+
+            if (Array.isArray(adminTokenObj.fcmTokens)) {
+              adminTokenObj.fcmTokens.forEach((t) => {
+                if (t.trim()) tokensArray.push(t.trim());
+              });
+            } else if (typeof adminTokenObj.fcmToken === "string") {
+              adminTokenObj.fcmToken.split(",").forEach((t) => {
+                if (t.trim()) tokensArray.push(t.trim());
+              });
+            }
+          });
+
         }
       } else {
         const guestTokenObj = allTokens[guestCode];
-        if (guestTokenObj?.fcmToken) tokensArray.push(guestTokenObj.fcmToken);
+        // if (guestTokenObj?.fcmToken) tokensArray.push(guestTokenObj.fcmToken);
+
+        if (guestTokenObj) {
+          if (Array.isArray(guestTokenObj.fcmTokens)) {
+            guestTokenObj.fcmTokens.forEach((t) => {
+              if (t.trim()) tokensArray.push(t.trim());
+            });
+          } else if (typeof guestTokenObj.fcmToken === "string") {
+            guestTokenObj.fcmToken.split(",").forEach((t) => {
+              if (t.trim()) tokensArray.push(t.trim());
+            });
+          }
+        }
+
       }
 
       if (tokensArray.length === 0) return;
@@ -206,9 +251,25 @@ firestore
           const allTokens = tokensSnapshot.val();
 
           const unreadAdmins = notif.unreadBy || [];
-          const tokensArray = unreadAdmins
-            .map((adminCode) => allTokens[adminCode]?.fcmToken)
-            .filter((token) => typeof token === "string");
+          // const tokensArray = unreadAdmins
+          //   .map((adminCode) => allTokens[adminCode]?.fcmToken)
+          //   .filter((token) => typeof token === "string");
+
+          const tokensArray = [];
+          unreadAdmins.forEach((adminCode) => {
+            const adminTokenObj = allTokens[adminCode];
+            if (!adminTokenObj) return;
+
+            if (Array.isArray(adminTokenObj.fcmTokens)) {
+              adminTokenObj.fcmTokens.forEach((t) => {
+                if (t.trim()) tokensArray.push(t.trim());
+              });
+            } else if (typeof adminTokenObj.fcmToken === "string") {
+              adminTokenObj.fcmToken.split(",").forEach((t) => {
+                if (t.trim()) tokensArray.push(t.trim());
+              });
+            }
+          });
 
           if (tokensArray.length === 0) return;
 
