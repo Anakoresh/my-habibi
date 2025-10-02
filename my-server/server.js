@@ -238,6 +238,9 @@ generalChatRef
 // ---------------------- ADMIN CHAT ----------------------
 const adminChatsRef = db.ref("admin_chats");
 
+const processedMessages = new Set(); // храним ключи уже обработанных сообщений
+const subscribedGuests = new Set(); // чтобы подписка на гостя была только однажды
+
 adminChatsRef.once("value", (snapshot) => {
   snapshot.forEach((guestSnapshot) => {
     subscribeToGuestMessages(guestSnapshot.key);
@@ -249,12 +252,14 @@ adminChatsRef.on("child_added", (guestSnapshot) => {
 });
 
 function subscribeToGuestMessages(guestCode) {
+  if (subscribedGuests.has(guestCode)) return; // уже подписаны
+  subscribedGuests.add(guestCode);
+
   const messagesRef = db.ref(`admin_chats/${guestCode}/messages`);
-  const processedMessages = new Set();
 
   messagesRef.on("child_added", async (msgSnap) => {
     const msgKey = msgSnap.key;
-    if (processedMessages.has(msgKey)) return; // Уже обработано
+    if (processedMessages.has(msgKey)) return; // уже обработано
     processedMessages.add(msgKey);
 
     const msg = msgSnap.val();
