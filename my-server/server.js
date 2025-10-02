@@ -131,6 +131,7 @@ generalChatRef
         data: {
           role: newMessage.role || "guest",
           timestamp: String(newMessage.timestamp || ""),
+          click_action: "/profile"
         },
       };
 
@@ -325,6 +326,7 @@ function subscribeToGuestMessages(guestCode) {
         data: {
           role: msg.role || "",
           timestamp: String(msg.timestamp || ""),
+          click_action: "/profile"
         },
       };
 
@@ -390,6 +392,7 @@ firestore
                       : notif.timestamp
                   )
                 : "",
+              click_action: "/admin"
             },
           };
 
