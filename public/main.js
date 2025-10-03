@@ -48,10 +48,13 @@ toggle.addEventListener("click", () => {
   }
 });
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('SW registered:', reg.scope))
-      .catch(err => console.error('SW registration failed:', err));
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      const registration = await navigator.serviceWorker.register("/sw.js");
+      console.log("Cache SW registered:", registration.scope);
+    } catch (err) {
+      console.error("SW registration failed:", err);
+    }
   });
 }

@@ -24,6 +24,15 @@ function updateMetaTags(article) {
         }
         tag.setAttribute("content", content);
     });
+
+    const canonicalUrl = `https://habibiexperience.com/article?slug=${encodeURIComponent(article.slug)}`;
+    let linkCanonical = document.querySelector('link[rel="canonical"]');
+    if (!linkCanonical) {
+        linkCanonical = document.createElement("link");
+        linkCanonical.setAttribute("rel", "canonical");
+        document.head.appendChild(linkCanonical);
+    }
+    linkCanonical.setAttribute("href", canonicalUrl);
 }
 
 async function loadArticle() {

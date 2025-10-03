@@ -17,8 +17,17 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: "img/firebase-logo.jpg",
+    icon: "/img/firebase-logo.jpg",
+    data: {
+      click_action: payload.data?.click_action || "/"
+    }
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+self.addEventListener("notificationclick", function (event) {
+  event.notification.close();
+  const clickAction = event.notification.data?.click_action || "/";
+  event.waitUntil(clients.openWindow(clickAction));
 });

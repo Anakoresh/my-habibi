@@ -1,10 +1,35 @@
+import { dbRT } from "./firebase.js";
 import { db } from "./firebase.js";
 import {
   collection,
   getDocs,
   updateDoc,
   doc,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+import { remove, ref } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+
+window.deleteGuest = async (guestId, bookingCode) => {
+  if (!confirm("Are you sure you want to delete this guest?")) return;
+
+  try {
+    await deleteDoc(doc(db, "guests", guestId));
+    console.log(`Guest ${guestId} deleted from Firestore`);
+
+    if (bookingCode) {
+      await remove(ref(dbRT, `users/${bookingCode}`));
+      await remove(ref(dbRT, `admin_chats/${bookingCode}`));
+      await remove(ref(dbRT, `tokens/${bookingCode}`));
+      console.log(`BookingCode ${bookingCode} data deleted from Realtime Database`);
+    }
+
+    alert("Guest deleted successfully!");
+    loadGuests(dateFilter.value);
+  } catch (error) {
+    console.error("Error deleting guest:", error);
+    alert("Failed to delete guest.");
+  }
+};
 
 const guestList = document.getElementById("guest-list");
 const dateFilter = document.getElementById("date-filter");
@@ -80,6 +105,7 @@ function renderGuest(guest) {
         <button class="custom-btn" onclick="openOrdersModal('${
           guest.bookingCode 
         }')">orders</button>
+        <button class="delete-btn" onclick="deleteGuest('${guest.id}', '${guest.bookingCode}')">delete guest</button>
     `;
 
   guestList.appendChild(guestDiv);

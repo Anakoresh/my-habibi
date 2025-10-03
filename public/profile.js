@@ -132,6 +132,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// if ("serviceWorker" in navigator) {
+//   document.addEventListener("DOMContentLoaded", async () => {
+//     const authCode = localStorage.getItem("authCode");
+//     if (authCode) {
+//       try {
+//         const registration = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
+//         console.log("Firebase Messaging SW registered:", registration.scope);
+//       } catch (error) {
+//         console.log("Firebase SW registration failed:", error);
+//       }
+//     }
+//   });
+// }
+
+
 
 
 

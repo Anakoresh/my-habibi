@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-if (localStorage.getItem("authCode")) {
-  import("./firebase.js").then(({ requestPermission }) => {
-    requestPermission();
-  });
-}
+// if (localStorage.getItem("authCode")) {
+//   import("./firebase.js").then(({ requestPermission }) => {
+//     requestPermission();
+//   });
+// }

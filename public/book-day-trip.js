@@ -264,12 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function closeModal() {
-    overlay.classList.add("d-none");
-    bookingForm.classList.add("d-none");
-    successMessage.classList.add("d-none");
-  }
-
   function showSuccessMessage() {
     successMessage.classList.remove("d-none");
     overlay.classList.remove("d-none");
@@ -292,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const newOverlay = overlay.cloneNode(true);
     overlay.parentNode.replaceChild(newOverlay, overlay);
-
+    
     location.reload();
   }
 

@@ -60,6 +60,7 @@ addGuestForm.addEventListener("submit", async (e) => {
 
     alert("Guest added successfully!");
     addGuestForm.reset();
+    location.reload();
   } catch (error) {
     console.error("Error adding guest:", error);
     alert("Failed to add guest. Please try again.");

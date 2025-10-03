@@ -65,6 +65,7 @@
                 <div class="d-flex flex-column align-items-start">
                     <button id="logout-btn">logout</button>
                     <span class="admin-name"></span>
+                    <button id="enable-push" style="display:none;">turn on notifications</button>
                 </div>
                 <button id="notifications-btn" class="notifications-btn"><img src="img/notifications.png" alt="notifications"><span class="d-none">0</span></button>
             </div>
@@ -133,16 +134,14 @@
             <div class="next-btn">></div>
         </div>
     </footer>
-    <script src="check-auth-code-admin.js" type="module"></script>
     <script src="main.js"></script>
-    <script src="notifications-btn.js"></script>
+    <script src="logout.js"></script>
     <script src="firebase.js" type="module"></script>
+    <script src="notifications-btn.js"></script>
     <script src="admin.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="profile.js" type="module"></script>
-    <script src="logout.js"></script>
     <script src="notifications.js" type="module"></script>
-    <script src="request-permission.js" type="module"></script>
     <script>
         flatpickr("#event-date", {
             mode: "multiple",
@@ -150,5 +149,7 @@
         });
     </script>
     <script src="admin-chat-icon-admin.js" type="module"></script>
+    <script src="check-auth-code-admin.js" type="module"></script>
+    <script src="request-permission.js" type="module"></script>
 </body>
 </html>

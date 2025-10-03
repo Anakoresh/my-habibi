@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"; 
 import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-messaging.js";
 
@@ -20,13 +20,38 @@ const db = getFirestore(app);
 const dbRT = getDatabase(app);
 const messaging = getMessaging(app);
 
+// async function saveFcmToken(userId, token) {
+//   try {
+//     const tokenRef = ref(dbRT, 'tokens/' + userId + '/fcmToken');
+//     await set(tokenRef, token);
+//     console.log("Token saved to database for user:", userId);
+//   } catch (error) {
+//     console.error('Error saving token to database:', error);
+//   }
+// }
+
 async function saveFcmToken(userId, token) {
   try {
-    const tokenRef = ref(dbRT, 'tokens/' + userId + '/fcmToken');
-    await set(tokenRef, token);
-    console.log("Token saved to database for user:", userId);
+    const tokenRef = ref(dbRT, 'tokens/' + userId + '/fcmTokens');
+    const snapshot = await get(tokenRef);
+    let tokens = [];
+
+    if (snapshot.exists()) {
+      tokens = snapshot.val(); // уже массив
+      if (!Array.isArray(tokens)) {
+        tokens = []; // вдруг там строка
+      }
+    }
+
+    if (!tokens.includes(token)) {
+      tokens.push(token);
+      await set(tokenRef, tokens);
+      console.log("Token saved for user:", userId);
+    } else {
+      console.log("Token already exists for user:", userId);
+    }
   } catch (error) {
-    console.error('Error saving token to database:', error);
+    console.error('Error saving token:', error);
   }
 }
 
@@ -67,18 +92,6 @@ onMessage(messaging, (payload) => {
       body: payload.notification.body,
       icon: "/img/firebase-logo.jpg"
     });
-  }
-});
-
-document.addEventListener("DOMContentLoaded", async () => {
-  const authCode = localStorage.getItem("authCode");
-  if (authCode && "serviceWorker" in navigator) {
-    try {
-      const registration = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
-      console.log("Service Worker registered with scope:", registration.scope);
-    } catch (error) {
-      console.log("Service Worker registration failed:", error);
-    }
   }
 });
 

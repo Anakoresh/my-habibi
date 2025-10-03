@@ -77,15 +77,18 @@ window.showModal = function(tripId) {
   document.querySelector(".overlay").classList.remove("d-none");
 };
 
-window.closeModal = function() {
+window.closeModalDescription = function() {
   document.getElementById("trip-info").classList.add("d-none");
   document.querySelector(".overlay").classList.add("d-none");
 };
 
+const closeModalButton = document.querySelector(".close-modal-trip-description");
+closeModalButton.addEventListener("click", closeModalDescription);
+
 const overlay = document.querySelector(".overlay");
 overlay.addEventListener("click", (event) => {
     if (event.target === overlay) {
-      closeModal();
+      closeModalDescription();
     }
   });
 

@@ -87,6 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isValidCode) {
       alert("Invalid reservation code.");
       localStorage.removeItem("authCode");
+      document.querySelectorAll("button").forEach((btn) => {
+            if (btn.disabled && btn.dataset.originalText) {
+              setButtonProcessing(btn, false);
+            }
+          });
+          showBookingForm(tripId, tripName);
+          return;
     }
   }
 
@@ -230,7 +237,6 @@ document.addEventListener("DOMContentLoaded", () => {
     closeModalButton.addEventListener("click", () => {
       successMessage.classList.add("d-none");
       overlay.classList.add("d-none");
-      location.reload();
     });
   }
 

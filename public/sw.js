@@ -1,30 +1,29 @@
-const CACHE_NAME = "habibi-cache-v1";
+const CACHE_NAME = "habibi-cache-v2";
 const urlsToCache = [
-  "/",                
-  "/index.html", 
-  "/wildlife.html",
-  "/trips.html",  
-  "/tours.html",
-  "/recommendations.html",
-  "/profile.html",
-  "/privacy-policy.html",
-  "/faq.html",
-  "/events.html",
-  "/contacts.html",
-  "/blog.html",
-  "/article.html",
-  "/all-tours.html",
-  "/tours/tour-1.html",
-  "/tours/tour-2.html",
-  "/tours/tour-3.html",
-  "/tours/tour-4.html",
-  "/tours/tour-5.html",
-  "/tours/tour-6.html",
-  "/tours/tour-7.html",
-  "/tours/tour-8.html",
-  "/tours/tour-9.html",
-  "/manifest.json", 
-  "/css/styles.css", 
+  "/",
+  "/wildlife",
+  "/trips",
+  "/tours",
+  "/recommendations",
+  "/profile",
+  "/privacy-policy",
+  "/faq",
+  "/events",
+  "/contacts",
+  "/blog",
+  "/article",
+  "/all-tours",
+  "/tours/tour-1",
+  "/tours/tour-2",
+  "/tours/tour-3",
+  "/tours/tour-4",
+  "/tours/tour-5",
+  "/tours/tour-6",
+  "/tours/tour-7",
+  "/tours/tour-8",
+  "/tours/tour-9",
+  "/manifest.json",
+  "/style.css",
   "/main.js",
   "/tours/tour-1.js",
   "/tours/tour-2.js",
@@ -127,37 +126,46 @@ const urlsToCache = [
   "/img/yala.webp",
 ];
 
-// Устанавливаем сервис-воркер и добавляем файлы в кэш
-self.addEventListener("install", (event) => {
+// Установка и кэширование
+self.addEventListener("install", event => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
+    caches.open(CACHE_NAME).then(async cache => {
+      for (const url of urlsToCache) {
+        try { await cache.add(url); } 
+        catch (err) { console.warn("Не удалось закэшировать:", url, err); }
+      }
     })
   );
-  console.log("Service Worker установлен и кэш создан ✅");
 });
 
-// Активируем и очищаем старые кэши
-self.addEventListener("activate", (event) => {
+// Активация и очистка старых кэшей
+self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((name) => {
-          if (name !== CACHE_NAME) {
-            return caches.delete(name);
-          }
-        })
-      );
-    })
+    caches.keys().then(keys => 
+      Promise.all(keys.map(key => key !== CACHE_NAME ? caches.delete(key) : null))
+    ).then(() => self.clients.claim())
   );
-  console.log("Старые кэши очищены ✅");
 });
 
-// Обрабатываем запросы: сначала кэш, потом сеть
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const cachedResponse = await cache.match(event.request);
+
+      const fetchAndCache = fetch(event.request)
+        .then(networkResponse => {
+          if (event.request.method === "GET") {
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+
+      // Возвращаем кэш, если есть, иначе ждём fetch
+      return cachedResponse || fetchAndCache;
+    })()
   );
 });
+

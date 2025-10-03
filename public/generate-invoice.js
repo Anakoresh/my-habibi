@@ -140,7 +140,8 @@ async function generateInvoice(isGroup) {
 window.generateInvoice = generateInvoice;
 
 async function sendInvoiceByEmail(emails, pdfBase64) {
-    const scriptURL = "http://localhost:3000/send-email";
+    // const scriptURL = "http://localhost:3000/send-email";
+    const scriptURL = "https://my-habibi.onrender.com/send-email";
 
     for (const email of emails) {
         const response = await fetch(scriptURL, {

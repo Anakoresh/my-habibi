@@ -1,5 +1,5 @@
 import { dbRT } from "./firebase.js";
-import { ref, push, onChildAdded, query, orderByChild, get, update } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+import { ref, push, onValue, get, update } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 import { db } from "./firebase.js";
 import { collection, getDocs, query as fsQuery, where } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 
@@ -59,17 +59,28 @@ async function initializeChat() {
   if (!guestCode) return;
 
   guestChatRef = ref(dbRT, `admin_chats/${guestCode}/messages`);
-  const messagesQuery = query(guestChatRef, orderByChild("timestamp"));
 
-  onChildAdded(messagesQuery, (snapshot) => {
-    const data = snapshot.val();
-    addMessage(data.user, data.text, data.role, data.timestamp);
+  onValue(guestChatRef, (snapshot) => {
+    chatBox.innerHTML = "";
+
+    let messages = [];
+    snapshot.forEach((childSnapshot) => {
+      const data = childSnapshot.val();
+      data.key = childSnapshot.key;
+      messages.push(data);
+    });
+
+    messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+    messages.forEach((data) => {
+      addMessage(data.user, data.text, data.role, data.timestamp);
+    });
   });
 }
 
 async function sendMessage(message) {
   if (!message.trim()) return;
-  const timestamp = Date.now();
+  const timestamp = new Date().toISOString();
 
   let readBy = {};
   adminCodes.forEach(code => {
@@ -91,15 +102,23 @@ async function sendMessage(message) {
 
 function addMessage(user, message, role, timestamp) {
   const date = new Date(timestamp);
-  const time = date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const formattedDate = date.toLocaleDateString([], {
+  if (isNaN(date)) {
+    console.error("Invalid timestamp:", timestamp);
+    return;
+  }
+
+  const datePart = date.toLocaleDateString([], {
     day: "2-digit",
     month: "short",
     year: "numeric",
   });
+
+  const timePart = date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const timeString = `${datePart} ${timePart}`;
 
   const messageElement = document.createElement("div");
   let messageClass = "message";
@@ -111,7 +130,7 @@ function addMessage(user, message, role, timestamp) {
     messageClass += " left";
   }
   messageElement.className = messageClass;
-  messageElement.innerHTML = `<p><strong>${user}:</strong> ${message}</p><span class="time">${formattedDate} ${time}</span>`;
+  messageElement.innerHTML = `<p><strong>${user}:</strong> ${message}</p><span class="time">${timeString}</span>`;
   if (role === "admin" || role === "manager") {
     messageElement.innerHTML += `<span class="role">${role}</span>`;
   }
