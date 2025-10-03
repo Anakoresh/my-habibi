@@ -101,11 +101,6 @@ generalChatRef
       const tokensSnapshot = await db.ref("tokens").once("value");
       if (!tokensSnapshot.exists()) return;
 
-      // const tokensArray = Object.entries(tokensSnapshot.val())
-      //   .filter(([authCode]) => authCode !== newMessage.userCode)
-      //   .map(([_, obj]) => obj.fcmToken)
-      //   .filter((token) => typeof token === "string");
-
       const tokensArray = [];
       Object.entries(tokensSnapshot.val())
         .filter(([authCode]) => authCode !== newMessage.userCode)
@@ -145,102 +140,10 @@ generalChatRef
   });
 
 // ---------------------- ADMIN CHAT ----------------------
-// const adminChatsRef = db.ref("admin_chats");
-
-// adminChatsRef.on("child_added", (guestSnapshot) => {
-//   const guestCode = guestSnapshot.key;
-//   const messagesRef = db.ref(`admin_chats/${guestCode}/messages`);
-
-//   messagesRef.on("child_added", async (msgSnap) => {
-//     const msg = msgSnap.val();
-
-//     let msgTime = 0;
-//     if (typeof msg.timestamp === "string") {
-//       msgTime = new Date(msg.timestamp).getTime();
-//     } else if (typeof msg.timestamp === "number") {
-//       msgTime = msg.timestamp;
-//     } else if (msg.timestamp?.seconds) {
-//       msgTime = msg.timestamp.seconds * 1000;
-//     }
-//     if (msgTime < serverStartTime) return;
-
-//     console.log(`New message detected (admin chat) for guest ${guestCode}:`, msg);
-
-//     try {
-//       const tokensSnapshot = await db.ref("tokens").once("value");
-//       if (!tokensSnapshot.exists()) return;
-//       const allTokens = tokensSnapshot.val();
-//       let tokensArray = [];
-
-//       if (msg.role === "guest") {
-//         if (msg.read_by) {
-//           // tokensArray = Object.keys(msg.read_by)
-//           //   .map((adminCode) => allTokens[adminCode]?.fcmToken)
-//           //   .filter((token) => typeof token === "string");
-          
-//           tokensArray = [];
-//           Object.keys(msg.read_by).forEach((adminCode) => {
-//             const adminTokenObj = allTokens[adminCode];
-//             if (!adminTokenObj) return;
-
-//             if (Array.isArray(adminTokenObj.fcmTokens)) {
-//               adminTokenObj.fcmTokens.forEach((t) => {
-//                 if (t.trim()) tokensArray.push(t.trim());
-//               });
-//             } else if (typeof adminTokenObj.fcmToken === "string") {
-//               adminTokenObj.fcmToken.split(",").forEach((t) => {
-//                 if (t.trim()) tokensArray.push(t.trim());
-//               });
-//             }
-//           });
-
-//         }
-//       } else {
-//         const guestTokenObj = allTokens[guestCode];
-//         // if (guestTokenObj?.fcmToken) tokensArray.push(guestTokenObj.fcmToken);
-
-//         if (guestTokenObj) {
-//           if (Array.isArray(guestTokenObj.fcmTokens)) {
-//             guestTokenObj.fcmTokens.forEach((t) => {
-//               if (t.trim()) tokensArray.push(t.trim());
-//             });
-//           } else if (typeof guestTokenObj.fcmToken === "string") {
-//             guestTokenObj.fcmToken.split(",").forEach((t) => {
-//               if (t.trim()) tokensArray.push(t.trim());
-//             });
-//           }
-//         }
-
-//       }
-
-//       if (tokensArray.length === 0) return;
-
-//       const payload = {
-//         notification: {
-//           title: `New message from ${msg.user || msg.role}`,
-//           body: msg.text || "",
-//         },
-//         data: {
-//           role: msg.role || "",
-//           timestamp: String(msg.timestamp || ""),
-//         },
-//       };
-
-//       await Promise.all(
-//         tokensArray.map((token) => admin.messaging().send({ ...payload, token }))
-//       );
-//       console.log(`Admin chat notifications sent for guest ${guestCode}!`);
-//     } catch (err) {
-//       console.error("Error sending admin chat notifications:", err);
-//     }
-//   });
-// });
-
-// ---------------------- ADMIN CHAT ----------------------
 const adminChatsRef = db.ref("admin_chats");
 
-const processedMessages = new Set(); // храним ключи уже обработанных сообщений
-const subscribedGuests = new Set(); // чтобы подписка на гостя была только однажды
+const processedMessages = new Set(); 
+const subscribedGuests = new Set(); 
 
 adminChatsRef.once("value", (snapshot) => {
   snapshot.forEach((guestSnapshot) => {
@@ -356,9 +259,6 @@ firestore
           const allTokens = tokensSnapshot.val();
 
           const unreadAdmins = notif.unreadBy || [];
-          // const tokensArray = unreadAdmins
-          //   .map((adminCode) => allTokens[adminCode]?.fcmToken)
-          //   .filter((token) => typeof token === "string");
 
           const tokensArray = [];
           unreadAdmins.forEach((adminCode) => {
